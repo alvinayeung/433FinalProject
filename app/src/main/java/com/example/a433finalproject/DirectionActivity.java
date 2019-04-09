@@ -14,6 +14,7 @@ public class DirectionActivity extends AppCompatActivity {
         System.out.print("IT WORKED OH MY GOSH");
         System.out.print("IT WORKED OH MY GOSH!");
         System.out.print("HELLLLLLOOOFOHDSFHDSFHSDJFHSDJFHSDJFHSDJH");
+        System.out.print("IT WORKED OH MY GOSH!");
     }
 
 }
