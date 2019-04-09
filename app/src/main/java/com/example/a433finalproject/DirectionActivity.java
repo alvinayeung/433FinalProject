@@ -12,6 +12,7 @@ public class DirectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         System.out.print("Hello");
         System.out.print("IT WORKED OH MY GOSH");
+        System.out.print("IT WORKED OH MY GOSH!");
     }
 
 }
