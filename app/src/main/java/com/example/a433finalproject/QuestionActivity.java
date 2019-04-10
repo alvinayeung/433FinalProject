@@ -18,6 +18,8 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("Hello my name is Aman!");
+
 //        db=openOrCreateDatabase("Databse", Context.MODE_PRIVATE, null);
 //        db.execSQL("DROP TABLE IF EXISTS Bins");
 //        db.execSQL("CREATE TABLE Bins (Item text, Bins text)");
