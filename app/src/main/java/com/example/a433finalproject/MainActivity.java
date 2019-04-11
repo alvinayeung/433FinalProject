@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent a = new Intent(MainActivity.this, DirectionMapActivity.class);
+                Intent a = new Intent(MainActivity.this, Question.class);
                 startActivity(a);
             }
         }, 10000);

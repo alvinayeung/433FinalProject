@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">433 Final Project</string>
     <string name="title_activity_direction_map">Map</string>
+    <string name="title_activity_route">Map</string>
 </resources>

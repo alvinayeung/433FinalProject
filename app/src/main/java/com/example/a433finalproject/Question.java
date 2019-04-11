@@ -18,21 +18,13 @@ public class Question extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-//        db=openOrCreateDatabase("Databse", Context.MODE_PRIVATE, null);
-//        db.execSQL("DROP TABLE IF EXISTS Bins");
-//        db.execSQL("CREATE TABLE Bins (Item text, Bins text)");
-//
-//        db.execSQL("insert into Item values('water bottle', 'Recycle')");
-//        db.execSQL("insert into Item values('Paper', 'Recycle')");
-//        db.execSQL("insert into Item values('soda can', 'Recycle')");
-//
-//        db.execSQL("insert into Item values('Lenoir tray', 'Compost')");
-//
-//        db.execSQL("insert into Item values('Chip bag', 'Trash')");
 
     }
 
     public void search(View view) {
+
+        Intent x = new Intent(Question.this, RouteActivity.class);
+        startActivity(x);
 
 
 
