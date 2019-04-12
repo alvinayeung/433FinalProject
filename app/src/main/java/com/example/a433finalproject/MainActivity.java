@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent a = new Intent(MainActivity.this, Question.class);
                 startActivity(a);
             }
-        }, 10000);
+        }, 3000);
 
 
 
