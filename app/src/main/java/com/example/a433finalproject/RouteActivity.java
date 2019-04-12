@@ -31,6 +31,16 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
 
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (1, 35.898001, -79.043404, 'trash_cardboard', 'bin1.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (2, 35.898337, -79.042039, 'mixed_recycling', 'bin2.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (3, 35.898370, -79.042229, 'trash_cardboard', 'bin3.jpg')");
+
+
+
+
+
+
+
 
 
 
