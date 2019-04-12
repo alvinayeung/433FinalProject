@@ -1,5 +1,7 @@
 package com.example.a433finalproject;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -22,6 +24,16 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        SQLiteDatabase binsDatabase = openOrCreateDatabase("MyBinsDatabase", Context.MODE_PRIVATE, null);
+        binsDatabase.execSQL("DROP TABLE IF EXISTS Bins");
+        binsDatabase.execSQL("CREATE TABLE Bins (binID INT PRIMARY KEY, lat FLOAT, long FLOAT, disposalType TEXT, photoFileName TEXT)");
+
+        
+
+
+
+
     }
 
 
@@ -40,6 +52,7 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
+
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
