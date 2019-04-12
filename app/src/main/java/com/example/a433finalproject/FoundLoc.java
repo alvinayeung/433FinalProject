@@ -8,6 +8,7 @@ import android.view.View;
 
 
 
+
 public class FoundLoc extends AppCompatActivity {
 
     @Override
@@ -17,6 +18,15 @@ public class FoundLoc extends AppCompatActivity {
     }
 
     public void updateNo(View view) {
+
+
+    }
+
+
+    public void updateYes(View view) {
+
+        Intent a = new Intent(FoundLoc.this, RouteActivity.class);
+        startActivity(a);
 
 
     }
