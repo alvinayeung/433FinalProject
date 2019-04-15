@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -340,11 +342,18 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+
+
                 Intent a = new Intent(MainActivity.this, Question.class);
                 startActivity(a);
             }
-        }, 1000);
+        }, 10000);
 
+        ImageView img = (ImageView) findViewById(R.id.LoadImageID);
+        img.setBackgroundResource(R.drawable.mylist);
+        img.setImageBitmap(null);
+        ((AnimationDrawable)img.getBackground()).start();
 
 
 
