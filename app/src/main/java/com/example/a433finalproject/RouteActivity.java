@@ -204,10 +204,139 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (308, 35.911754, -79.049451, 'trash_cardboard', 'bin308.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (309, 35.91175, -79.049426, 'trash_trash', 'bin309.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (310, 35.911643, -79.049498, 'mixed_recycling', 'bin310.jpg')");
-        binsDatabase.execSQL("INSERT INTO Bins VALUES (311, 35.911643, -79.049498, 'trash_trash', 'bin31.jpg')");
-        
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (311, 35.911643, -79.049498, 'trash_trash', 'bin311.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (312, 35.908239, -79.054181, 'mixed_recycling', 'bin312.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (313, 35.908239, -79.054181, 'trash_trash', 'bin313.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (314, 35.907751, -79.053691, 'mixed_recycling', 'bin314.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (315, 35.907717, -79.053658, 'compost', 'bin3145jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (316, 35.907753, -79.053638, 'trash_trash', 'bin316.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (317, 35.907755, -79.053605, 'trash_cardboard', 'bin317.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (318, 35.907454, -79.054037, 'trash_trash', 'bin318.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (319, 35.907454, -79.054048, 'trash_cardboard', 'bin319.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (320, 35.907458, -79.054102, 'mixed_recycling', 'bin320.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (321, 35.90604, -79.054266, 'trash_cardboard', 'bin321.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (322, 35.905615, -79.054597, 'trash_cardboard', 'bin322.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (323, 35.905568, -79.054613, 'trash_trash', 'bin323.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (324, 35.9051942, -79.0546131, 'trash_cardboard', 'bin324.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (325, 35.9051895, -79.0546061, 'trash_trash', 'bin325.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (326, 35.905402, -79.0544473, 'mixed_recycling', 'bin326.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (327, 35.908457, -79.050755, 'trash_trash', 'bin327.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (328, 35.908457, -79.050755, 'mixed_recycling', 'bin328.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (329, 35.9080868, -79.0511286, 'mixed_recycling', 'bin329.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (330, 35.9081199, -79.0510381, 'mixed_recycling', 'bin330.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (331, 35.9080415, -79.0510787, 'trash_cardboard', 'bin331.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (332, 35.9080434, -79.0510683, 'trash_trash', 'bin332.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (333, 35.9074979, -79.052222, 'trash_cardboard', 'bin333.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (334, 35.9075111, -79.052221, 'trash_trash', 'bin334.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (335, 35.9075197, -79.0519564, 'mixed_recycling', 'bin335.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (336, 35.907455, -79.051467, 'trash_trash', 'bin336.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (337, 35.907455, -79.051467, 'mixed_recycling', 'bin337.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (338, 35.907238, -79.051014, 'trash_trash', 'bin338.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (339, 35.907238, -79.051014, 'mixed_recycling', 'bin339.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (340, 35.907692, -79.050687, 'compost', 'bin340jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (341, 35.907561, -79.050315, 'trash_trash', 'bin341.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (342, 35.907561, -79.050315, 'mixed_recycling', 'bin342.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (343, 35.90782, -79.050067, 'trash_trash', 'bin343.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (344, 35.90782, -79.050067, 'mixed_recycling', 'bin344.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (345, 35.907764, -79.049779, 'trash_trash', 'bin345.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (346, 35.907751, -79.049765, 'trash_cardboard', 'bin346.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (347, 35.9071045, -79.0492148, 'mixed_recycling', 'bin347.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (348, 35.9070997, -79.0492322, 'trash_trash', 'bin348.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (349, 35.9070761, -79.0492438, 'trash_cardboard', 'bin349.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (350, 35.9071158, -79.0492148, 'compost', 'bin350.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (351, 35.906989, -79.050433, 'mixed_recycling', 'bin351.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (352, 35.906989, -79.050433, 'trash_trash', 'bin352.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (351, 35.907053, -79.050944, 'mixed_recycling', 'bin351.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (352, 35.907015, -79.050898, 'trash_trash', 'bin352.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (353, 35.906981, -79.050925, 'trash_cardboard', 'bin353.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (354, 35.907023, -79.050939, 'compost', 'bin354.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (355, 35.906883, -79.051937, 'mixed_recycling', 'bin355.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (356, 35.906883, -79.051937, 'trash_trash', 'bin356.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (357, 35.906543,-79.052805, 'mixed_recycling', 'bin357.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (358, 35.906543, -79.052805, 'trash_trash', 'bin358.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (359, 35.9064021, -79.0513104, 'trash_cardboard', 'bin359.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (360, 35.9063936, -79.0512837, 'trash_trash', 'bin360.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (361, 35.9062679, -79.0514089, 'trash_cardboard', 'bin361.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (362, 35.90625, -79.0514182, 'trash_trash', 'bin362.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (363, 35.906293, -79.049704, 'mixed_recycling', 'bin363.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (364, 35.906255, -79.049792, 'trash_trash', 'bin364.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (365, 35.906251, -79.04975, 'trash_cardboard', 'bin365.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (366, 35.906039, -79.051254, 'mixed_recycling', 'bin366.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (367, 35.905877, -79.051203, 'trash_trash', 'bin367.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (368, 35.905858, -79.051175, 'trash_cardboard', 'bin368.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (369, 35.905884, -79.051217, 'compost', 'bin369.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (370, 35.905899, -79.052048, 'mixed_recycling', 'bin370.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (371, 35.905899, -79.052048, 'trash_trash', 'bin371.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (372, 35.905785, -79.053139, 'mixed_recycling', 'bin372.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (373, 35.905785, -79.053139, 'trash_trash', 'bin373.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (374, 35.905649, -79.052647, 'mixed_recycling', 'bin374.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (375, 35.905649, -79.052647, 'trash_trash', 'bin375.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (374, 35.90537, -79.052433, 'mixed_recycling', 'bin374.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (375, 35.905283, -79.0524527, 'trash_trash', 'bin375.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (376, 35.905321, -79.052424, 'trash_cardboard', 'bin376.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (377, 35.905166, -79.052832, 'trash_trash', 'bin376.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (378, 35.905166, -79.052832, 'mixed_recycling', 'bin377.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (379, 35.905113, -79.052164, 'trash_trash', 'bin379.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (380, 35.905113, -79.052164, 'mixed_recycling', 'bin380.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (381, 35.904863, -79.053686, 'trash_trash', 'bin381.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (382, 35.904863, -79.053686, 'mixed_recycling', 'bin382.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (383, 35.904641, -79.052767, 'trash_trash', 'bin383.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (384, 35.904641, -79.052767, 'mixed_recycling', 'bin384.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (385, 35.904705, -79.052344, 'trash_trash', 'bin385.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (386, 35.904705, -79.052344, 'mixed_recycling', 'bin386.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (385, 35.904475, -79.052878, 'trash_trash', 'bin385.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (388, 35.904448, -79.052906, 'trash_cardboard', 'bin388.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (389, 35.90435, -79.053584, 'mixed_recycling', 'bin389.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (390, 35.90435, -79.053584, 'trash_trash', 'bin390.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (391, 35.903961, -79.054154, 'mixed_recycling', 'bin391.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (392, 35.903961, -79.054154, 'trash_trash', 'bin392.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (393, 35.903541,-79.054275, 'mixed_recycling', 'bin393.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (394, 35.903768, -79.054145, 'trash_trash', 'bin394.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (395, 35.903726, -79.054164, 'trash_cardboard', 'bin395.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (396, 35.90359, -79.054957, 'trash_trash', 'bin396.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (397, 35.903598, -79.05498, 'trash_cardboard', 'bin397.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (398, 35.903345, -79.054177, 'mixed_recycling', 'bin398.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (395, 35.903177, -79.055498, 'trash_cardboard', 'bin395.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (396, 35.903177, -79.055498, 'trash_trash', 'bin396.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (397, 35.902988, -79.054077, 'mixed_recycling', 'bin397.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (398, 35.902988, -79.054077, 'trash_trash', 'bin398.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (399, 35.902822, -79.053803, 'mixed_recycling', 'bin399.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (400, 35.902739, -79.053845, 'trash_trash', 'bin400.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (401, 35.902784, -79.05384, 'trash_cardboard', 'bin401.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (402, 35.902546, -79.054355, 'mixed_recycling', 'bin402.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (403, 35.902546, -79.054355, 'trash_trash', 'bin403.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (404, 35.902267, -79.054012, 'mixed_recycling', 'bin404.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (405, 35.902267, -79.054012, 'trash_trash', 'bin405.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (406, 35.90261, -79.054852, 'mixed_recycling', 'bin406.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (407, 35.902618, -79.054978, 'trash_trash', 'bin407.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (408, 35.902629, -79.05501, 'trash_cardboard', 'bin408.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (409, 35.902557, -79.056226, 'trash_trash', 'bin409.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (410, 35.902262, -79.055971, 'trash_cardboard', 'bin410.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (411, 35.902232, -79.055998, 'trash_trash', 'bin411.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (412, 35.901889, -79.054457, 'mixed_recycling', 'bin412.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (413, 35.901889, -79.054457, 'trash_trash', 'bin413.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (414, 35.901025, -79.053245, 'trash_cardboard', 'bin414.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (415, 35.900991, -79.05331, 'trash_trash', 'bin415.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (416, 35.900492, -79.0524, 'trash_cardboard', 'bin416.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (417, 35.900481, -79.052428, 'trash_trash', 'bin417.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (418, 35.900922, -79.054271, 'trash_trash', 'bin418.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (419, 35.901009, -79.054498, 'trash_cardboard', 'bin419.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (420, 35.901024, -79.054545, 'trash_trash', 'bin420.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (421, 35.901081, -79.054638, 'mixed_recycling', 'bin421.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (422, 35.899883, -79.0558588, 'trash_cardboard', 'bin422.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (423, 35.899887, -79.055927, 'trash_trash', 'bin423.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (424, 35.899879, -79.055807, 'mixed_recycling', 'bin424.jpg')");
+        binsDatabase.execSQL("INSERT INTO Bins VALUES (425, 35.900959, -79.056652, 'trash_trash', 'bin425.jpg')");
+
+
+
+
+
+
+
 
     }
+
 
 
     /**
