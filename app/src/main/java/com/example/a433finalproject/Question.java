@@ -86,5 +86,5 @@ public class Question extends AppCompatActivity {
         startActivityForResult(x, 1);
     }
 
-    
+
 }
