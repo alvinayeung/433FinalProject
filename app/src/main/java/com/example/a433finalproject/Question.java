@@ -21,7 +21,7 @@ public class Question extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        db=openOrCreateDatabase("MyDatabse", Context.MODE_PRIVATE, null);
+        db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
         db.execSQL("CREATE TABLE GreenCompass (itemID int, Item text, Bins text)");
 
