@@ -1,6 +1,7 @@
 package com.example.a433finalproject;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class RouteActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    SQLiteDatabase binsDatabase;
+    private Cursor c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +28,12 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        SQLiteDatabase binsDatabase = openOrCreateDatabase("MyBinsDatabase", Context.MODE_PRIVATE, null);
+        binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
+
+
         binsDatabase.execSQL("DROP TABLE IF EXISTS Bins");
         binsDatabase.execSQL("CREATE TABLE Bins (binID INT PRIMARY KEY, lat FLOAT, long FLOAT, disposalType TEXT, photoFileName TEXT)");
 
-
-
-        binsDatabase.execSQL("INSERT INTO Bins VALUES (1, 35.898001, -79.043404, 'trash_cardboard', 'bin1.jpg')");
-        binsDatabase.execSQL("INSERT INTO Bins VALUES (2, 35.898337, -79.042039, 'mixed_recycling', 'bin2.jpg')");
-        binsDatabase.execSQL("INSERT INTO Bins VALUES (3, 35.898370, -79.042229, 'trash_cardboard', 'bin3.jpg')");
 
 
 
@@ -62,7 +62,6 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (223, 35.912207, -79.05439, 'trash_trash', 'bin223.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (224, 35.912207, -79.05439, 'mixed_recycling', 'bin224.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (225, 35.912304, -79.05388, 'mixed_recycling', 'bin225.jpg')");
-        binsDatabase.execSQL("INSERT INTO Bins VALUES (226, 35.912304, -79.05388, 'trash_trash', 'bin226.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (226, 35.912304, -79.05388, 'trash_trash', 'bin226.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (227, 35.913214, -79.052566, 'mixed_recycling', 'bin227.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (228, 35.913214, -79.052566, 'trash_trash', 'bin228.jpg')");
@@ -294,12 +293,20 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
 
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        c = binsDatabase.rawQuery("SELECT * FROM Bins", null);
+
+        c.moveToFirst();
+
+        for(int i = 0; i < c.getCount(); i++) {
+            LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
+            mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+            c.moveToNext();
+        }
+
     }
 }
