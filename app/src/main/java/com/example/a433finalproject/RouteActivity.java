@@ -15,9 +15,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RouteActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    GoogleMap mMap;
     SQLiteDatabase binsDatabase;
-    private Cursor c;
+    Cursor c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
