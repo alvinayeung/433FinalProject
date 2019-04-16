@@ -37,7 +37,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
     SQLiteDatabase db= null;
     SQLiteDatabase binsDatabase;
-    EditText searchET=null;
+    EditText searchET = null;
     private GoogleApiClient gac = null;
     private float myLat;
     private float myLong;
@@ -562,8 +562,6 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
 
     public void camera(View view) {
-
-
         Log.v("CAMERA_CLICK", "Button got clicked");
         Intent x = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(x, 1);
