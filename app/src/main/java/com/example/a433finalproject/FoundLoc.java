@@ -18,23 +18,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class FoundLoc extends AppCompatActivity {
-    GoogleMap mMap;
-    SQLiteDatabase binsDatabase;
-    Cursor c;
+
+    private int routeID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found_loc);
 
-        TextView part1 = (TextView) findViewById(R.id.part1sent);
-        TextView part2 = (TextView) findViewById(R.id.part2sent);
-        TextView part3 = (TextView) findViewById(R.id.part3sent);
+        TextView part1 = findViewById(R.id.part1sent);
+        TextView part2 = findViewById(R.id.part2sent);
+        TextView part3 = findViewById(R.id.part3sent);
 
         Bundle bundle= getIntent().getExtras();
-        String searchString= bundle.getString("ETstring");
+        String searchString= bundle.getString("ET_string");
 
         part1.setText("Your " + searchString);
+
+        routeID = bundle.getInt("chosenRoute");
 
         String part2String = bundle.getString("bin");
 
@@ -44,9 +46,12 @@ public class FoundLoc extends AppCompatActivity {
             part2.setText("is compostable");
         }else if(part2String.matches("trash")){
             part2.setText("is trash");
+        }else if(part2String.matches("trash_cardboard")) {
+            part2.setText("is corrugated cardboard trash");
         }
 
         part3.setText("The closest disposal for your item is " + String.valueOf(bundle.getDouble("minDistance")) + " feet away.");
+
 
     }
 
@@ -59,11 +64,8 @@ public class FoundLoc extends AppCompatActivity {
     public void updateYes(View view) {
 
         Intent a = new Intent(FoundLoc.this, RouteActivity.class);
+        a.putExtra("route", routeID);
         startActivity(a);
-
-//        onMapReady(mMap);
-
-
     }
 
 
