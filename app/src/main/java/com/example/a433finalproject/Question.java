@@ -44,9 +44,6 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     private double minDistance;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -437,6 +434,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         Cursor cardboardCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + card + "'" ,null);
 
         recycleCursor.moveToFirst();
+
 
 
         Double recycleList[] = new Double[recycleCursor.getCount()];
