@@ -399,7 +399,6 @@ public class Question extends AppCompatActivity {
 
     public void camera(View view) {
 
-
         Log.v("CAMERA_CLICK", "Button got clicked");
         Intent x = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(x, 1);
