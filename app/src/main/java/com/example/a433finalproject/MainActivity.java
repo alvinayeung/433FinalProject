@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent a = new Intent(MainActivity.this, Question.class);
                 startActivity(a);
             }
-        }, 10000);
+        }, 2000);
 
         ImageView img = (ImageView) findViewById(R.id.LoadImageID);
         img.setBackgroundResource(R.drawable.mylist);
