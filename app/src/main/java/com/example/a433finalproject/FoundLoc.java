@@ -46,7 +46,7 @@ public class FoundLoc extends AppCompatActivity {
             part2.setText("is trash");
         }
 
-        part3.setText("The closest disposal for your item is " + String.valueOf(bundle.getDouble("minDistance")) + "feet away.");
+        part3.setText("The closest disposal for your item is " + String.valueOf(bundle.getDouble("minDistance")) + " feet away.");
 
     }
 

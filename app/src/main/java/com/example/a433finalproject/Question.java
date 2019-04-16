@@ -463,37 +463,13 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
                     recycleList[i] = this.getDistance(myLat, myLong, recycleCursor.getFloat(1), recycleCursor.getFloat(2));
                     recycleCursor.moveToNext();
                     recycleBool = true;
-
-
-                    if (recycleBool) {
-                        minDistance = Collections.min(Arrays.asList(recycleList));
-                    } else if (trashBool) {
-                        minDistance = Collections.min(Arrays.asList(trashList));
-                    } else if (compBool) {
-                        minDistance = Collections.min(Arrays.asList(compostList));
-                    } else if (cardBool) {
-                        minDistance = Collections.min(Arrays.asList(cardboardList));
-                    }
-
-
                 }
             } else if (disposalType.equalsIgnoreCase("compost")) {
                 for (int i = 0; i < compostCursor.getCount(); i++) {
 
                     compostList[i] = this.getDistance(myLat, myLong, compostCursor.getFloat(1), compostCursor.getFloat(2));
                     compostCursor.moveToNext();
-                    trashBool = true;
-
-
-                    if (recycleBool) {
-                        minDistance = Collections.min(Arrays.asList(recycleList));
-                    } else if (trashBool) {
-                        minDistance = Collections.min(Arrays.asList(trashList));
-                    } else if (compBool) {
-                        minDistance = Collections.min(Arrays.asList(compostList));
-                    } else if (cardBool) {
-                        minDistance = Collections.min(Arrays.asList(cardboardList));
-                    }
+                    compBool = true;
 
 
                 }
@@ -502,19 +478,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
                     trashList[i] = this.getDistance(myLat, myLong, trashCursor.getFloat(1), trashCursor.getFloat(2));
                     trashCursor.moveToNext();
-                    cardBool = true;
-
-
-                    if (recycleBool) {
-                        minDistance = Collections.min(Arrays.asList(recycleList));
-                    } else if (trashBool) {
-                        minDistance = Collections.min(Arrays.asList(trashList));
-                    } else if (compBool) {
-                        minDistance = Collections.min(Arrays.asList(compostList));
-                    } else if (cardBool) {
-                        minDistance = Collections.min(Arrays.asList(cardboardList));
-                    }
-
+                    trashBool = true;
 
                 }
             } else if (disposalType.equalsIgnoreCase("trash_cardboard")) {
@@ -522,25 +486,28 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
                     cardboardList[i] = this.getDistance(myLat, myLong, cardboardCursor.getFloat(1), cardboardCursor.getFloat(2));
                     cardboardCursor.moveToNext();
-                    compBool = true;
+                    cardBool = true;
 
-
-                    if (recycleBool) {
-                        minDistance = Collections.min(Arrays.asList(recycleList));
-                    } else if (trashBool) {
-                        minDistance = Collections.min(Arrays.asList(trashList));
-                    } else if (compBool) {
-                        minDistance = Collections.min(Arrays.asList(compostList));
-                    } else if (cardBool) {
-                        minDistance = Collections.min(Arrays.asList(cardboardList));
-                    }
 
 
                 }
             }
 
+            if (recycleBool) {
+                minDistance = Collections.min(Arrays.asList(recycleList));
+            } else if (trashBool) {
+                minDistance = Collections.min(Arrays.asList(trashList));
+            } else if (compBool) {
+                minDistance = Collections.min(Arrays.asList(compostList));
+            } else if (cardBool) {
+                minDistance = Collections.min(Arrays.asList(cardboardList));
+            }
+
+
 
             minDistance =Math.round(minDistance* 3280.84);
+
+
 
 
 
