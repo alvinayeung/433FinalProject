@@ -19,6 +19,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,6 +43,9 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     private float myLat;
     private float myLong;
     private double minDistance;
+
+
+
 
 
     @Override
@@ -408,111 +412,117 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
     public void search(View view) {
 
-        searchET= findViewById(R.id.searchTextID);
-        String searchString = searchET.getText().toString();
+        searchET = findViewById(R.id.searchTextID);
+        String searchString = searchET.getText().toString().toLowerCase();
 
         Cursor c = db.rawQuery("select Bins from GreenCompass Where Item like" + "'" + searchString + "'", null);
         c.moveToFirst();
 
-        //Cursor c2 = db.rawQuery("SELECT * FROM Bins", null);
+        if (c.getCount() == 0) {
+            Toast.makeText(this, "Not in Database", Toast.LENGTH_SHORT).show();
+        } else {
 
-        Cursor c3 = db.rawQuery("select * from GreenCompass Where Item like" + "'" + searchString + "'", null);
-        c3.moveToFirst();
+            //Cursor c2 = db.rawQuery("SELECT * FROM Bins", null);
 
-        String disposalType = c3.getString(2);
+            Cursor c3 = db.rawQuery("select * from GreenCompass Where Item like" + "'" + searchString + "'", null);
+            c3.moveToFirst();
 
-
-        String card = "trash_cardboard";
-        String recycle = "mixed_recycling";
-        String compost = "compost";
-        String trash = "trash_trash";
+            String disposalType = c3.getString(2);
 
 
-        Cursor recycleCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + recycle + "'",null);
-        Cursor compostCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + compost + "'",null);
-        Cursor trashCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + trash + "'",null);
-        Cursor cardboardCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + card + "'" ,null);
-
-        recycleCursor.moveToFirst();
+            String card = "trash_cardboard";
+            String recycle = "mixed_recycling";
+            String compost = "compost";
+            String trash = "trash_trash";
 
 
+            Cursor recycleCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + recycle + "'", null);
+            Cursor compostCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + compost + "'", null);
+            Cursor trashCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + trash + "'", null);
+            Cursor cardboardCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + card + "'", null);
 
-        Double recycleList[] = new Double[recycleCursor.getCount()];
-        Double compostList[] = new Double[compostCursor.getCount()];
-        Double trashList[] = new Double[trashCursor.getCount()];
-        Double cardboardList[] = new Double[cardboardCursor.getCount()];
+            recycleCursor.moveToFirst();
+            compostCursor.moveToFirst();
+            cardboardCursor.moveToFirst();
+            trashCursor.moveToFirst();
 
-        boolean recycleBool = false;
-        boolean trashBool = false;
-        boolean cardBool = false;
-        boolean compBool = false;
+            Double recycleList[] = new Double[recycleCursor.getCount()];
+            Double compostList[] = new Double[compostCursor.getCount()];
+            Double trashList[] = new Double[trashCursor.getCount()];
+            Double cardboardList[] = new Double[cardboardCursor.getCount()];
+
+            boolean recycleBool = false;
+            boolean trashBool = false;
+            boolean cardBool = false;
+            boolean compBool = false;
 
 
-        if(disposalType.equalsIgnoreCase("recycle")) {
-            for(int i = 0; i < recycleCursor.getCount(); i++) {
+            if (disposalType.equalsIgnoreCase("recycle")) {
+                for (int i = 0; i < recycleCursor.getCount(); i++) {
 
-                recycleList[i] = this.getDistance(myLat, myLong, recycleCursor.getFloat(1), recycleCursor.getFloat(2));
-                recycleCursor.moveToNext();
-                recycleBool = true;
+                    recycleList[i] = this.getDistance(myLat, myLong, recycleCursor.getFloat(1), recycleCursor.getFloat(2));
+                    recycleCursor.moveToNext();
+                    recycleBool = true;
+                }
+            } else if (disposalType.equalsIgnoreCase("compost")) {
+                for (int i = 0; i < compostCursor.getCount(); i++) {
 
+                    compostList[i] = this.getDistance(myLat, myLong, compostCursor.getFloat(1), compostCursor.getFloat(2));
+                    compostCursor.moveToNext();
+                    compBool = true;
+
+
+                }
+            } else if (disposalType.equalsIgnoreCase("trash")) {
+                for (int i = 0; i < trashCursor.getCount(); i++) {
+
+                    trashList[i] = this.getDistance(myLat, myLong, trashCursor.getFloat(1), trashCursor.getFloat(2));
+                    trashCursor.moveToNext();
+                    trashBool = true;
+
+                }
+            } else if (disposalType.equalsIgnoreCase("trash_cardboard")) {
+                for (int i = 0; i < cardboardCursor.getCount(); i++) {
+
+                    cardboardList[i] = this.getDistance(myLat, myLong, cardboardCursor.getFloat(1), cardboardCursor.getFloat(2));
+                    cardboardCursor.moveToNext();
+                    cardBool = true;
+
+
+
+                }
             }
-        }
 
-        else if(disposalType.equalsIgnoreCase("compost")) {
-            for(int i = 0; i < compostCursor.getCount(); i++) {
-
-                compostList[i] = this.getDistance(myLat, myLong, compostCursor.getFloat(1), compostCursor.getFloat(2));
-                compostCursor.moveToNext();
-                trashBool = true;
+            if (recycleBool) {
+                minDistance = Collections.min(Arrays.asList(recycleList));
+            } else if (trashBool) {
+                minDistance = Collections.min(Arrays.asList(trashList));
+            } else if (compBool) {
+                minDistance = Collections.min(Arrays.asList(compostList));
+            } else if (cardBool) {
+                minDistance = Collections.min(Arrays.asList(cardboardList));
             }
+
+
+
+            minDistance =Math.round(minDistance* 3280.84);
+
+
+
+
+
+
+            Log.v("MYTAG", " " + c.getString(0));
+
+            Intent x = new Intent(Question.this, FoundLoc.class);
+
+            x.putExtra("bin", "" + c.getString(0));
+            x.putExtra("ETstring", "" + searchString);
+            x.putExtra("minDistance", minDistance);
+
+            startActivity(x);
+
         }
-
-        else if(disposalType.equalsIgnoreCase("trash")) {
-            for(int i = 0; i < trashCursor.getCount(); i++) {
-
-                trashList[i] = this.getDistance(myLat, myLong, trashCursor.getFloat(1), trashCursor.getFloat(2));
-                trashCursor.moveToNext();
-                cardBool = true;
-
-            }
-        }
-
-        else if(disposalType.equalsIgnoreCase("trash_cardboard")) {
-            for(int i = 0; i < cardboardCursor.getCount(); i++) {
-
-                cardboardList[i] = this.getDistance(myLat, myLong, cardboardCursor.getFloat(1), cardboardCursor.getFloat(2));
-                cardboardCursor.moveToNext();
-                compBool = true;
-
-            }
-        }
-
-        if(recycleBool) {
-            minDistance = Collections.min(Arrays.asList(recycleList));
-        }
-
-        else if(trashBool) {
-            minDistance = Collections.min(Arrays.asList(trashList));
-        }
-        else if(compBool) {
-            minDistance = Collections.min(Arrays.asList(compostList));
-        }
-        else if(cardBool) {
-            minDistance = Collections.min(Arrays.asList(cardboardList));
-        }
-
-
-
-        Log.v("MYTAG", " " + c.getString(0));
-
-        Intent x = new Intent(Question.this, FoundLoc.class);
-
-        x.putExtra("bin", "" + c.getString(0));
-        x.putExtra("ETstring", "" + searchString);
-        x.putExtra("minDistance", minDistance);
-
-        startActivity(x);
-
     }
 
     @Override
@@ -560,7 +570,6 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
 
     public void camera(View view) {
-
 
         Log.v("CAMERA_CLICK", "Button got clicked");
         Intent x = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
