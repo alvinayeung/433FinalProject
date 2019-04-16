@@ -91,6 +91,9 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (54, 35.908647, -79.029899, 'mixed_recycling', 'bin54.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (55, 35.906139, -79.042575, 'trash_trash', 'bin55.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (56, 35.901621, -79.04662, 'mixed_recycling', 'bin56.jpg')");
+
+
+
         binsDatabase.execSQL("INSERT INTO Bins VALUES (201, 35.915457, -79.051475, 'trash_trash', 'bin201.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (202, 35.914573, -79.051555, 'trash_cardboard', 'bin202.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (203, 35.914556, -79.051539, 'trash_trash', 'bin203.jpg')");
@@ -326,6 +329,13 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (431, 35.903177, -79.055498, 'trash_trash', 'bin431.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (432, 35.902988, -79.054077, 'mixed_recycling', 'bin432.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
+
+
+
+
+
+
+
 
     }
 
