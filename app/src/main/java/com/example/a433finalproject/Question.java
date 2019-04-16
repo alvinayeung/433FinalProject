@@ -16,7 +16,6 @@ public class Question extends AppCompatActivity {
 
     SQLiteDatabase db= null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class Question extends AppCompatActivity {
 
         db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
-        db.execSQL("CREATE TABLE GreenCompass (itemID INT, Item TEXT, Bins TEXT)");
+        db.execSQL("CREATE TABLE GreenCompass (itemID int, Item text, Bins text)");
 
         db.execSQL("insert into GreenCompass values(100,'water bottle', 'recycle');");
         db.execSQL("insert into GreenCompass values(101,'paper', 'recycle');");
@@ -65,9 +64,14 @@ public class Question extends AppCompatActivity {
         db.execSQL("insert into GreenCompass values(400,'cardboard', 'trash_cardboard')");
         db.execSQL("insert into GreenCompass values(401,'cardboard box', 'trash_cardboard')");
 
-
-
-
+        //test
+//        Cursor c=db.rawQuery("select * from GreenCompass", null);
+//        c.moveToFirst();
+//        for(int i=0; i<c.getCount(); i++){
+//            Log.v("PRINT DATABASE", "DataBase: " +
+//                    + c.getInt(0) + ", " + c.getString(1) + ", " + c.getString(2));
+//            c.moveToNext();
+//        }
 
     }
 
@@ -85,6 +89,4 @@ public class Question extends AppCompatActivity {
         Intent x = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(x, 1);
     }
-
-
 }
