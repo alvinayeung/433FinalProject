@@ -12,13 +12,39 @@ import android.view.View;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-public class Question extends AppCompatActivity {
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+
+public class Question extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     SQLiteDatabase db= null;
     SQLiteDatabase binsDatabase;
-    SQLiteDatabase mydb= null;
     EditText searchET=null;
+    private GoogleApiClient gac = null;
+    private float myLat;
+    private float myLong;
+    private double minDistance;
+
+
+
 
 
     @Override
@@ -26,10 +52,20 @@ public class Question extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+
+        if (gac == null){
+            gac = new GoogleApiClient.Builder(this).
+                    addConnectionCallbacks(this).
+                    addOnConnectionFailedListener(this).
+                    addApi(LocationServices.API).build();
+        }
+
+
+
         //item database
         db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
-        db.execSQL("CREATE TABLE GreenCompass (itemID int, Item text, Bins text)");
+        db.execSQL("CREATE TABLE GreenCompass (itemID INT, Item TEXT, Bins TEXT)");
 
         //recycle
         db.execSQL("insert into GreenCompass values(100,'water bottle', 'recycle');");
@@ -70,6 +106,7 @@ public class Question extends AppCompatActivity {
         //cardboard
         db.execSQL("insert into GreenCompass values(400,'cardboard', 'trash_cardboard')");
         db.execSQL("insert into GreenCompass values(401,'cardboard box', 'trash_cardboard')");
+
 
         //Location Database
         binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
@@ -368,34 +405,161 @@ public class Question extends AppCompatActivity {
         binsDatabase.execSQL("INSERT INTO Bins VALUES (432, 35.902988, -79.054077, 'mixed_recycling', 'bin432.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
 
-        //test
-//        Cursor c=db.rawQuery("select * from GreenCompass", null);
-//        c.moveToFirst();
-//        for(int i=0; i<c.getCount(); i++){
-//            Log.v("PRINT DATABASE", "DataBase: " +
-//                    + c.getInt(0) + ", " + c.getString(1) + ", " + c.getString(2));
-//            c.moveToNext();
-//        }
+
 
     }
 
     public void search(View view) {
 
-        searchET= (EditText) findViewById(R.id.searchTextID);
+        searchET= findViewById(R.id.searchTextID);
         String searchString = searchET.getText().toString();
 
         Cursor c = db.rawQuery("select Bins from GreenCompass Where Item like" + "'" + searchString + "'", null);
         c.moveToFirst();
+
+        //Cursor c2 = db.rawQuery("SELECT * FROM Bins", null);
+
+        Cursor c3 = db.rawQuery("select * from GreenCompass Where Item like" + "'" + searchString + "'", null);
+        c3.moveToFirst();
+
+        String disposalType = c3.getString(2);
+
+
+        String card = "trash_cardboard";
+        String recycle = "mixed_recycling";
+        String compost = "compost";
+        String trash = "trash_trash";
+
+
+        Cursor recycleCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + recycle + "'",null);
+        Cursor compostCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + compost + "'",null);
+        Cursor trashCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + trash + "'",null);
+        Cursor cardboardCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE disposalType like" + "'" + card + "'" ,null);
+
+        recycleCursor.moveToFirst();
+
+
+        Double recycleList[] = new Double[recycleCursor.getCount()];
+        Double compostList[] = new Double[compostCursor.getCount()];
+        Double trashList[] = new Double[trashCursor.getCount()];
+        Double cardboardList[] = new Double[cardboardCursor.getCount()];
+
+        boolean recycleBool = false;
+        boolean trashBool = false;
+        boolean cardBool = false;
+        boolean compBool = false;
+
+
+        if(disposalType.equalsIgnoreCase("recycle")) {
+            for(int i = 0; i < recycleCursor.getCount(); i++) {
+
+                recycleList[i] = this.getDistance(myLat, myLong, recycleCursor.getFloat(1), recycleCursor.getFloat(2));
+                recycleCursor.moveToNext();
+                recycleBool = true;
+
+            }
+        }
+
+        else if(disposalType.equalsIgnoreCase("compost")) {
+            for(int i = 0; i < compostCursor.getCount(); i++) {
+
+                compostList[i] = this.getDistance(myLat, myLong, compostCursor.getFloat(1), compostCursor.getFloat(2));
+                compostCursor.moveToNext();
+                trashBool = true;
+            }
+        }
+
+        else if(disposalType.equalsIgnoreCase("trash")) {
+            for(int i = 0; i < trashCursor.getCount(); i++) {
+
+                trashList[i] = this.getDistance(myLat, myLong, trashCursor.getFloat(1), trashCursor.getFloat(2));
+                trashCursor.moveToNext();
+                cardBool = true;
+
+            }
+        }
+
+        else if(disposalType.equalsIgnoreCase("trash_cardboard")) {
+            for(int i = 0; i < cardboardCursor.getCount(); i++) {
+
+                cardboardList[i] = this.getDistance(myLat, myLong, cardboardCursor.getFloat(1), cardboardCursor.getFloat(2));
+                cardboardCursor.moveToNext();
+                compBool = true;
+
+            }
+        }
+
+        if(recycleBool) {
+            minDistance = Collections.min(Arrays.asList(recycleList));
+        }
+
+        else if(trashBool) {
+            minDistance = Collections.min(Arrays.asList(trashList));
+        }
+        else if(compBool) {
+            minDistance = Collections.min(Arrays.asList(compostList));
+        }
+        else if(cardBool) {
+            minDistance = Collections.min(Arrays.asList(cardboardList));
+        }
+
+
+
         Log.v("MYTAG", " " + c.getString(0));
 
         Intent x = new Intent(Question.this, FoundLoc.class);
 
         x.putExtra("bin", "" + c.getString(0));
         x.putExtra("ETstring", "" + searchString);
+        x.putExtra("minDistance", minDistance);
 
         startActivity(x);
 
     }
+
+    @Override
+    protected void onStart() {
+        gac.connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        gac.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        Log.v("my_tag", "On location called");
+        try {
+            Location loc = LocationServices.FusedLocationApi.getLastLocation(gac);
+            myLong = (float) loc.getLongitude();
+            myLat  = (float) loc.getLatitude();
+        }catch (SecurityException ex){
+            ex.printStackTrace();
+        }
+
+//       LocationRequest r = new LocationRequest();
+//       r.setInterval(1000);
+//       r.setFastestInterval(500);
+//       r.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//
+//       LocationServices.FusedLocationApi.requestLocationUpdates(c,r,this);
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
 
     public void camera(View view) {
 
@@ -403,4 +567,24 @@ public class Question extends AppCompatActivity {
         Intent x = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(x, 1);
     }
+
+
+
+    public double getDistance(float lat1, float lon1, float lat2, float lon2) {
+
+        double distance;
+
+        double p = 0.017453292519943295;    // Math.PI / 180
+
+        double a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
+                Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+                        (1 - Math.cos((lon2 - lon1) * p))/2;
+
+        distance = 12742 * Math.asin(Math.sqrt(a));
+
+        return distance;
+
+    }
+
+
 }
