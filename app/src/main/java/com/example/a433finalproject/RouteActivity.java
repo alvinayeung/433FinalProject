@@ -28,6 +28,37 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        getDatabase();
+    }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+
+        c = binsDatabase.rawQuery("SELECT * FROM Bins", null);
+
+        c.moveToFirst();
+
+        for(int i = 0; i < c.getCount(); i++) {
+            LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
+            mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+            c.moveToNext();
+        }
+
+    }
+
+    public void getDatabase(){
         binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
@@ -329,42 +360,5 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (431, 35.903177, -79.055498, 'trash_trash', 'bin431.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (432, 35.902988, -79.054077, 'mixed_recycling', 'bin432.jpg')");
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
-
-
-
-
-
-
-
-
-    }
-
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap = googleMap;
-
-        c = binsDatabase.rawQuery("SELECT * FROM Bins", null);
-
-        c.moveToFirst();
-
-        for(int i = 0; i < c.getCount(); i++) {
-            LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
-            mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-            c.moveToNext();
-        }
-
     }
 }

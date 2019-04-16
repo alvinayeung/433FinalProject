@@ -33,6 +33,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getDatbase();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Intent a = new Intent(MainActivity.this, Question.class);
+                startActivity(a);
+            }
+        }, 1000);
+
+        ImageView img = (ImageView) findViewById(R.id.LoadImageID);
+        img.setBackgroundResource(R.drawable.mylist);
+        img.setImageBitmap(null);
+        ((AnimationDrawable)img.getBackground()).start();
+
+    }
+
+    public void getDatbase(){
 
         binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
@@ -338,33 +358,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-
-
-                Intent a = new Intent(MainActivity.this, Question.class);
-                startActivity(a);
-            }
-        }, 2000);
-
-        ImageView img = (ImageView) findViewById(R.id.LoadImageID);
-        img.setBackgroundResource(R.drawable.mylist);
-        img.setImageBitmap(null);
-        ((AnimationDrawable)img.getBackground()).start();
-
-
-
-
     }
-
-//test if intent works
-//    public void testButton(View view) {
-//        Intent a = new Intent(this, Question.class);
-//        startActivity(a);
-//    }
 
 
 }

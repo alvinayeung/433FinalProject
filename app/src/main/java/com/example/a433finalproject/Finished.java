@@ -14,7 +14,7 @@ public class Finished extends AppCompatActivity {
     }
 
     public void goHome(View view) {
-        Intent x = new Intent(this, MainActivity.class);
+        Intent x = new Intent(this, Question.class);
         startActivity(x);
     }
 }
