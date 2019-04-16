@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.util.Log;
 import android.widget.EditText;
-
 import com.google.android.gms.common.api.GoogleApiClient;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,7 +25,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
 import java.sql.Array;
 import java.util.Arrays;
 import java.util.Collections;
