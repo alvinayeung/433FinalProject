@@ -47,30 +47,6 @@ public class FoundLoc extends AppCompatActivity {
 
             String searchString = extras.getString("ETstring");
 
-            part1.setText("Your " + searchString);
-
-            String part2String = extras.getString("bin");
-
-            if (part2String.matches("recycle")) {
-                part2.setText("is recyclable");
-            } else if (part2String.matches("compost")) {
-                part2.setText("is compostable");
-            } else if (part2String.matches("trash")) {
-                part2.setText("is trash");
-            } else if (part2String.matches("trash_cardboard")) {
-                part2.setText("is cardboard trash");
-            }
-
-            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ");
-        }else{
-
-            TextView part1 = (TextView) findViewById(R.id.part1sent);
-            TextView part2 = (TextView) findViewById(R.id.part2sent);
-            TextView part3 = (TextView) findViewById(R.id.part3sent);
-
-
-            String searchString = extras.getString("ETstring");
-
             part1.setText(searchString);
 
             String part2String = extras.getString("bin");
@@ -82,10 +58,42 @@ public class FoundLoc extends AppCompatActivity {
             } else if (part2String.matches("trash")) {
                 part2.setText("trash");
             } else if (part2String.matches("trash_cardboard")) {
-                part2.setText("cardboard trash");
+                part2.setText("recyclable");
             }
 
-            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ");
+            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
+        }else{
+
+            TextView part1 = (TextView) findViewById(R.id.part1sent);
+            TextView part2 = (TextView) findViewById(R.id.part2sent);
+            TextView part3 = (TextView) findViewById(R.id.part3sent);
+
+            ImageView image = (ImageView) findViewById(R.id.LoadImageID);
+
+
+            String searchString = extras.getString("ETstring");
+
+            part1.setText(searchString);
+
+            String part2String = extras.getString("bin");
+
+            if (part2String.matches("recycle")) {
+                part2.setText("recyclable");
+                image.setImageResource(R.drawable.recycle);
+            } else if (part2String.matches("compost")) {
+                part2.setText("compostable");
+                image.setImageResource(R.drawable.compost);
+            } else if (part2String.matches("trash")) {
+                part2.setText("trash");
+                image.setImageResource(R.drawable.trash);
+            } else if (part2String.matches("trash_cardboard")) {
+                part2.setText("recyclable");
+                image.setImageResource(R.drawable.cardboard);
+            }
+
+            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
+
+
         }
     }
 
