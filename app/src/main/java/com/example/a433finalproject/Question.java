@@ -113,15 +113,20 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             Double trashList[] = new Double[trashCursor.getCount()];
             Double cardboardList[] = new Double[cardboardCursor.getCount()];
 
+            int recycleIDList[] = new int[recycleCursor.getCount()];
+            int compostIDList[] = new int[compostCursor.getCount()];
+            int trashIDList[] = new int[trashCursor.getCount()];
+            int cardboardIDList[] = new int[cardboardCursor.getCount()];
+
             boolean recycleBool = false;
             boolean trashBool = false;
             boolean cardBool = false;
             boolean compBool = false;
 
-
             if (disposalType.equalsIgnoreCase("recycle")) {
                 for (int i = 0; i < recycleCursor.getCount(); i++) {
 
+                    recycleIDList[i] = recycleCursor.getInt(0);
                     recycleList[i] = this.getDistance(myLat, myLong, recycleCursor.getFloat(1), recycleCursor.getFloat(2));
                     recycleCursor.moveToNext();
                     recycleBool = true;
@@ -129,15 +134,15 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             } else if (disposalType.equalsIgnoreCase("compost")) {
                 for (int i = 0; i < compostCursor.getCount(); i++) {
 
+                    compostIDList[i] = compostCursor.getInt(0);
                     compostList[i] = this.getDistance(myLat, myLong, compostCursor.getFloat(1), compostCursor.getFloat(2));
                     compostCursor.moveToNext();
                     compBool = true;
-
-
                 }
             } else if (disposalType.equalsIgnoreCase("trash")) {
                 for (int i = 0; i < trashCursor.getCount(); i++) {
 
+                    trashIDList[i] = trashCursor.getInt(0);
                     trashList[i] = this.getDistance(myLat, myLong, trashCursor.getFloat(1), trashCursor.getFloat(2));
                     trashCursor.moveToNext();
                     trashBool = true;
@@ -146,14 +151,31 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             } else if (disposalType.equalsIgnoreCase("trash_cardboard")) {
                 for (int i = 0; i < cardboardCursor.getCount(); i++) {
 
+                    cardboardIDList[i] = cardboardCursor.getInt(0);
                     cardboardList[i] = this.getDistance(myLat, myLong, cardboardCursor.getFloat(1), cardboardCursor.getFloat(2));
                     cardboardCursor.moveToNext();
                     cardBool = true;
-
-
-
                 }
             }
+
+            if (recycleBool) {
+                minDistance = Collections.min(Arrays.asList(recycleList));
+                minDistanceIndex = this.findMinIdx(recycleList);
+                routeID = recycleIDList[minDistanceIndex];
+            } else if (trashBool) {
+                minDistance = Collections.min(Arrays.asList(trashList));
+                minDistanceIndex = this.findMinIdx(trashList);
+                routeID = trashIDList[minDistanceIndex];
+            } else if (compBool) {
+                minDistance = Collections.min(Arrays.asList(compostList));
+                minDistanceIndex = this.findMinIdx(compostList);
+                routeID = compostIDList[minDistanceIndex];
+            } else if (cardBool) {
+                minDistance = Collections.min(Arrays.asList(cardboardList));
+                minDistanceIndex = this.findMinIdx(cardboardList);
+                routeID = cardboardIDList[minDistanceIndex];
+            }
+
 
             if (recycleBool) {
                 minDistance = Collections.min(Arrays.asList(recycleList));
@@ -179,6 +201,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             x.putExtra("bin", "" + c.getString(0));
             x.putExtra("ETstring", "" + searchString);
             x.putExtra("minDistance", minDistance);
+            x.putExtra("chosenRoute", routeID);
             x.putExtra("picture", byteArray);
 
             startActivity(x);
@@ -273,6 +296,20 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         return distance;
 
     }
+
+    public int findMinIdx(Double[] numbers) {
+        if (numbers == null || numbers.length == 0) return -1;
+        Double minVal = numbers[0];
+        int minIdx = 0;
+        for(int idx=1; idx<numbers.length; idx++) {
+            if(numbers[idx] < minVal) {
+                minVal = numbers[idx];
+                minIdx = idx;
+            }
+        }
+        return minIdx;
+    }
+
 
     public void getDatabase(){
 

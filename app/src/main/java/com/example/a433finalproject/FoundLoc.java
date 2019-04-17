@@ -24,6 +24,7 @@ public class FoundLoc extends AppCompatActivity {
     GoogleMap mMap;
     SQLiteDatabase binsDatabase;
     Cursor c;
+    private int routeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class FoundLoc extends AppCompatActivity {
 
             String part2String = extras.getString("bin");
 
+            routeID = extras.getInt("chosenRoute");
+
             if (part2String.matches("recycle")) {
                 part2.setText("recyclable");
             } else if (part2String.matches("compost")) {
@@ -58,7 +61,7 @@ public class FoundLoc extends AppCompatActivity {
             } else if (part2String.matches("trash")) {
                 part2.setText("trash");
             } else if (part2String.matches("trash_cardboard")) {
-                part2.setText("recyclable");
+                part2.setText("corrugated cardboard");
             }
 
             part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
@@ -107,9 +110,9 @@ public class FoundLoc extends AppCompatActivity {
     public void updateYes(View view) {
 
         Intent a = new Intent(FoundLoc.this, RouteActivity.class);
+        a.putExtra("route", routeID);
         startActivity(a);
 
-//        onMapReady(mMap);
 
 
     }

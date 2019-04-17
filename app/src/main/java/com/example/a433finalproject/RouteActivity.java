@@ -18,6 +18,8 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
     GoogleMap mMap;
     SQLiteDatabase binsDatabase;
     Cursor c;
+    private int selectedRouteID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -355,16 +357,27 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
 
         mMap = googleMap;
 
+        Bundle bundle = getIntent().getExtras();
+        selectedRouteID = bundle.getInt("route");
+
+
         c = binsDatabase.rawQuery("SELECT * FROM Bins", null);
 
         c.moveToFirst();
 
+        Cursor routeCursor = binsDatabase.rawQuery("SELECT lat, long FROM Bins WHERE binID = " + selectedRouteID, null);
+
+        routeCursor.moveToFirst();
+
+        LatLng camera_location = new LatLng(routeCursor.getFloat(0),routeCursor.getFloat(1));
+
         for(int i = 0; i < c.getCount(); i++) {
             LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
             mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             c.moveToNext();
         }
 
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(camera_location));
     }
 }
