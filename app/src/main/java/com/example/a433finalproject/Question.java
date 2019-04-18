@@ -53,6 +53,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     byte[] byteArray;
     private int minDistanceIndex;
     public int routeID;
+    int minDistanceInt;
 
 
 
@@ -189,7 +190,8 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
 
 
-            minDistance =Math.round(minDistance* 3280.84);
+            minDistance = minDistance * 3280.84;
+            minDistanceInt = (int) minDistance;
 
             Log.v("BYTECOUNT",  " " + byteCount);
             Log.v("BYTEARRAY", " " + (byteArray==null));
@@ -203,7 +205,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
             x.putExtra("bin", "" + c.getString(0));
             x.putExtra("ETstring", "" + searchString);
-            x.putExtra("minDistance", minDistance);
+            x.putExtra("minDistance", minDistanceInt);
             x.putExtra("routeID",routeID);
             x.putExtra("picture", byteArray);
 
