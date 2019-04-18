@@ -21,10 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class FoundLoc extends AppCompatActivity {
-    GoogleMap mMap;
-    SQLiteDatabase binsDatabase;
-    Cursor c;
-    private int routeID;
+    public int routeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,10 @@ public class FoundLoc extends AppCompatActivity {
 
             String part2String = extras.getString("bin");
 
-            routeID = extras.getInt("chosenRoute");
+            routeID = extras.getInt("routeID");
+
+            Log.v("routeID", Integer.toString(routeID));
+
 
             if (part2String.matches("recycle")) {
                 part2.setText("recyclable");
@@ -65,6 +65,7 @@ public class FoundLoc extends AppCompatActivity {
             }
 
             part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
+
         }else{
 
             TextView part1 = (TextView) findViewById(R.id.part1sent);
@@ -77,6 +78,9 @@ public class FoundLoc extends AppCompatActivity {
             String searchString = extras.getString("ETstring");
 
             part1.setText(searchString);
+
+            routeID = extras.getInt("routeID");
+            Log.v("route",Integer.toString(routeID));
 
             String part2String = extras.getString("bin");
 
@@ -111,9 +115,8 @@ public class FoundLoc extends AppCompatActivity {
 
         Intent a = new Intent(FoundLoc.this, RouteActivity.class);
         a.putExtra("route", routeID);
+        Log.v("route",Integer.toString(routeID));
         startActivity(a);
-
-
 
     }
 
