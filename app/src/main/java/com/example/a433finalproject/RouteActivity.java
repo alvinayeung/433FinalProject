@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RouteActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -368,9 +370,12 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         LatLng camera_location = new LatLng(routeCursor.getFloat(1),routeCursor.getFloat(2));
 
         for(int i = 0; i < c.getCount(); i++) {
-            LatLng location = new LatLng(c.getFloat(0), c.getFloat(1));
+            Log.v("HELLO?", "YES");
+            LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
             mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
+
             c.moveToNext();
+
         }
 
         LatLngBounds CHAPEL_HILL = new LatLngBounds(camera_location, camera_location);
