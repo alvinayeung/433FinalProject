@@ -64,7 +64,7 @@ public class FoundLoc extends AppCompatActivity {
                 part2.setText("corrugated cardboard");
             }
 
-            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
+            part3.setText(" " + String.valueOf(extras.getInt("minDistance")) + " ft");
 
         }else{
 
@@ -98,7 +98,7 @@ public class FoundLoc extends AppCompatActivity {
                 image.setImageResource(R.drawable.cardboard);
             }
 
-            part3.setText(" " + String.valueOf(extras.getDouble("minDistance")) + " ft");
+            part3.setText(" " + String.valueOf(extras.getInt("minDistance")) + " ft");
 
 
         }
