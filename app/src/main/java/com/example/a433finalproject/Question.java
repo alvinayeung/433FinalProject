@@ -52,7 +52,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     int byteCount;
     byte[] byteArray;
     private int minDistanceIndex;
-    private int routeID;
+    public int routeID;
 
 
 
@@ -193,15 +193,18 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
             Log.v("BYTECOUNT",  " " + byteCount);
             Log.v("BYTEARRAY", " " + (byteArray==null));
-
             Log.v("MYTAG", " " + c.getString(0));
+            Log.v("ROUTE_ID",Integer.toString(routeID));
+
+
+
 
             Intent x = new Intent(Question.this, FoundLoc.class);
 
             x.putExtra("bin", "" + c.getString(0));
             x.putExtra("ETstring", "" + searchString);
             x.putExtra("minDistance", minDistance);
-            x.putExtra("chosenRoute", routeID);
+            x.putExtra("routeID",routeID);
             x.putExtra("picture", byteArray);
 
             startActivity(x);
@@ -232,13 +235,6 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         }catch (SecurityException ex){
             ex.printStackTrace();
         }
-
-//       LocationRequest r = new LocationRequest();
-//       r.setInterval(1000);
-//       r.setFastestInterval(500);
-//       r.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//
-//       LocationServices.FusedLocationApi.requestLocationUpdates(c,r,this);
 
     }
 
@@ -285,7 +281,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
         double distance;
 
-        double p = 0.017453292519943295;    // Math.PI / 180
+        double p = 0.017453292519943295;
 
         double a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
                 Math.cos(lat1 * p) * Math.cos(lat2 * p) *

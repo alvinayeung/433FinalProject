@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RouteActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -18,7 +19,8 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
     GoogleMap mMap;
     SQLiteDatabase binsDatabase;
     Cursor c;
-    private int selectedRouteID;
+    Cursor routeCursor;
+    public int selectedRouteID;
 
 
     @Override
@@ -333,12 +335,6 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
 
 
-
-
-
-
-
-
     }
 
 
@@ -365,11 +361,11 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
 
         c.moveToFirst();
 
-        Cursor routeCursor = binsDatabase.rawQuery("SELECT lat, long FROM Bins WHERE binID = " + selectedRouteID, null);
+        routeCursor = binsDatabase.rawQuery("SELECT * FROM Bins WHERE binID = " + selectedRouteID, null);
 
         routeCursor.moveToFirst();
 
-        LatLng camera_location = new LatLng(routeCursor.getFloat(0),routeCursor.getFloat(1));
+        LatLng camera_location = new LatLng(routeCursor.getFloat(1),routeCursor.getFloat(2));
 
         for(int i = 0; i < c.getCount(); i++) {
             LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
@@ -377,7 +373,9 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
             c.moveToNext();
         }
 
+        LatLngBounds CHAPEL_HILL = new LatLngBounds(camera_location, camera_location);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(camera_location));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(CHAPEL_HILL, 0));
+
     }
 }
