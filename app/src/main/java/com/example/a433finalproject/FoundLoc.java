@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class FoundLoc extends AppCompatActivity {
     public int routeID;
+    int currentItemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class FoundLoc extends AppCompatActivity {
             String part2String = extras.getString("bin");
 
             routeID = extras.getInt("routeID");
+            currentItemID = extras.getInt("currentItemID");
 
             Log.v("routeID", Integer.toString(routeID));
 
@@ -80,6 +82,7 @@ public class FoundLoc extends AppCompatActivity {
             part1.setText(searchString);
 
             routeID = extras.getInt("routeID");
+            currentItemID = extras.getInt("currentItemID");
             Log.v("route",Integer.toString(routeID));
 
             String part2String = extras.getString("bin");
@@ -107,6 +110,7 @@ public class FoundLoc extends AppCompatActivity {
     public void updateNo(View view) {
 
         Intent a = new Intent(FoundLoc.this, Finished.class);
+        a.putExtra("currentItemID",currentItemID);
         startActivity(a);
     }
 
@@ -115,6 +119,7 @@ public class FoundLoc extends AppCompatActivity {
 
         Intent a = new Intent(FoundLoc.this, RouteActivity.class);
         a.putExtra("route", routeID);
+        a.putExtra("currentItemID",currentItemID);
         Log.v("route",Integer.toString(routeID));
         startActivity(a);
 
