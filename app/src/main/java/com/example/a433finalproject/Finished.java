@@ -25,7 +25,7 @@ public class Finished extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        String myItemID = Integer.toString(extras.getInt("currentItemID"));
+        String myItemID = Integer.toString(extras.getInt("itemID"));
 
 
         Log.v("currentItemID", myItemID);
@@ -37,11 +37,12 @@ public class Finished extends AppCompatActivity {
         db2.execSQL("DROP TABLE IF EXISTS History");
         db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
-        Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + extras.getInt("currentItemID"), null);
+        Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
+        Log.v("currentItemIdCursor", c.getString(0));
 
-        db2.execSQL("INSERT INTO History " + "(" + extras.getInt("currentItemID") + "," + c.getString(1) + "," + c.getString(2), null);
+        db2.execSQL("INSERT INTO History " + "(" + myItemID + "," + c.getString(1) + "," + c.getString(2), null);
         db2.execSQL("Select itemID, Item, Bins FROM GreenCompass ");
         db2.execSQL("Select * FROM History");
         Log.v("history", c.getString(2));

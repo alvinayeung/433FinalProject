@@ -51,7 +51,7 @@ public class FoundLoc extends AppCompatActivity {
             String part2String = extras.getString("bin");
 
             routeID = extras.getInt("routeID");
-            currentItemID = extras.getInt("currentItemID");
+            currentItemID = extras.getInt("itemID");
 
             Log.v("routeID", Integer.toString(routeID));
             Log.v("FoundLocCurrentItemID", Integer.toString(currentItemID));
@@ -83,7 +83,7 @@ public class FoundLoc extends AppCompatActivity {
             part1.setText(searchString);
 
             routeID = extras.getInt("routeID");
-            currentItemID = extras.getInt("currentItemID");
+            currentItemID = extras.getInt("itemID");
             Log.v("FoundLoccurrentItemID", Integer.toString(currentItemID));
 
 
@@ -114,7 +114,7 @@ public class FoundLoc extends AppCompatActivity {
     public void updateNo(View view) {
 
         Intent a = new Intent(FoundLoc.this, Finished.class);
-        a.putExtra("currentItemID",currentItemID);
+        a.putExtra("itemID",currentItemID);
         startActivity(a);
     }
 
@@ -123,7 +123,7 @@ public class FoundLoc extends AppCompatActivity {
 
         Intent a = new Intent(FoundLoc.this, RouteActivity.class);
         a.putExtra("route", routeID);
-        a.putExtra("currentItemID",currentItemID);
+        a.putExtra("itemID",currentItemID);
         Log.v("route",Integer.toString(routeID));
         startActivity(a);
 
