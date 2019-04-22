@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         img.setImageBitmap(null);
         ((AnimationDrawable)img.getBackground()).start();
 
+
     }
 
     public void getDatabase(){

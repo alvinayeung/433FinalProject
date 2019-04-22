@@ -54,6 +54,7 @@ public class FoundLoc extends AppCompatActivity {
             currentItemID = extras.getInt("currentItemID");
 
             Log.v("routeID", Integer.toString(routeID));
+            Log.v("FoundLocCurrentItemID", Integer.toString(currentItemID));
 
 
             if (part2String.matches("recycle")) {
@@ -83,6 +84,9 @@ public class FoundLoc extends AppCompatActivity {
 
             routeID = extras.getInt("routeID");
             currentItemID = extras.getInt("currentItemID");
+            Log.v("FoundLoccurrentItemID", Integer.toString(currentItemID));
+
+
             Log.v("route",Integer.toString(routeID));
 
             String part2String = extras.getString("bin");
