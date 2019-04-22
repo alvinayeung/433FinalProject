@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getDatbase();
+        getDatabase();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getDatbase(){
+    public void getDatabase(){
 
         binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 

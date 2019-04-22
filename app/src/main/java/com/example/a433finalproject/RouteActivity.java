@@ -368,7 +368,7 @@ public class RouteActivity extends FragmentActivity implements OnMapReadyCallbac
         LatLng camera_location = new LatLng(routeCursor.getFloat(1),routeCursor.getFloat(2));
 
         for(int i = 0; i < c.getCount(); i++) {
-            LatLng location = new LatLng(c.getFloat(0), c.getFloat(1));
+            LatLng location = new LatLng(c.getFloat(1), c.getFloat(2));
             mMap.addMarker(new MarkerOptions().position(location).title(c.getString(3)));
             c.moveToNext();
         }
