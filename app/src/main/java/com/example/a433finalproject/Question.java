@@ -35,6 +35,8 @@ import java.sql.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import android.app.SearchManager;
+
 
 
 public class Question extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -55,6 +57,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     private int minDistanceIndex;
     public int routeID;
     int minDistanceInt;
+    int currentItemID;
 
 
 
@@ -84,14 +87,23 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
         if (c.getCount() == 0) {
             Toast.makeText(this, "Not in Database", Toast.LENGTH_SHORT).show();
-        } else {
 
-            //Cursor c2 = db.rawQuery("SELECT * FROM Bins", null);
+            try {
+                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                String term = "How to properly dispose " + searchString;
+                intent.putExtra(SearchManager.QUERY, term);
+                startActivity(intent);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
+        } else {
 
             Cursor c3 = db.rawQuery("select * from GreenCompass Where Item like" + "'" + searchString + "'", null);
             c3.moveToFirst();
 
             String disposalType = c3.getString(2);
+            currentItemID = c3.getInt(0);
 
 
             String card = "trash_cardboard";
@@ -209,6 +221,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             x.putExtra("minDistance", minDistanceInt);
             x.putExtra("routeID",routeID);
             x.putExtra("picture", byteArray);
+            x.putExtra("itemID", currentItemID);
 
             startActivity(x);
 
