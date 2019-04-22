@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Finished extends AppCompatActivity {
 
@@ -42,10 +45,18 @@ public class Finished extends AppCompatActivity {
 
         Log.v("currentItemIdCursor", c.getString(0));
 
-        db2.execSQL("INSERT INTO History " + "(" + myItemID + "," + c.getString(1) + "," + c.getString(2), null);
-        db2.execSQL("Select itemID, Item, Bins FROM GreenCompass ");
-        db2.execSQL("Select * FROM History");
+        db2.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
         Log.v("history", c.getString(2));
+
+        Cursor hC= db.rawQuery("Select * from History", null);
+        int count = hC.getCount() * 10;
+
+        TextView xID= (TextView) findViewById(R.id.pointsID);
+        xID.setText(Integer.toString(count));
+
+        c.getCount();
+        Log.v("COUNT", " " + c.getCount());
+
 
     }
 
