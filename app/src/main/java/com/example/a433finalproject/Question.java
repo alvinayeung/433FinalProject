@@ -42,6 +42,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
 
     SQLiteDatabase db= null;
     SQLiteDatabase binsDatabase;
+    SQLiteDatabase db2;
     EditText searchET=null;
     private GoogleApiClient gac = null;
     private float myLat;
@@ -212,6 +213,8 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             startActivity(x);
 
         }
+
+
     }
 
     @Override
@@ -265,9 +268,9 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         if((requestCode == 1) && (resultCode == RESULT_OK)) {
 
             bm = (Bitmap) data.getExtras().get("data");
-            imageview = ((ImageView) findViewById(R.id.itemImage));
-            imageview.setBackgroundResource(0);
-            imageview.setImageBitmap(bm);
+//            imageview = ((ImageView) findViewById(R.id.itemImage));
+//            imageview.setBackgroundResource(0);
+//            imageview.setImageBitmap(bm);
 
             byteCount = bm.getByteCount();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -306,6 +309,12 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             }
         }
         return minIdx;
+    }
+
+    public void goToHistory(View view) {
+        Intent x = new Intent(Question.this, History.class);
+        startActivity(x);
+
     }
 
 
@@ -654,6 +663,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
 
     }
+
 
 
 }
