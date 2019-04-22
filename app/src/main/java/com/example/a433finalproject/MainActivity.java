@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getDatbase();
+        getDatabase();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
         img.setImageBitmap(null);
         ((AnimationDrawable)img.getBackground()).start();
 
+
     }
 
-    public void getDatbase(){
+    public void getDatabase(){
 
         binsDatabase = this.openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 

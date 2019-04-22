@@ -222,6 +222,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             x.putExtra("routeID",routeID);
             x.putExtra("picture", byteArray);
             x.putExtra("itemID", currentItemID);
+            Log.v("currentItemID", Integer.toString(currentItemID));
 
             startActivity(x);
 
