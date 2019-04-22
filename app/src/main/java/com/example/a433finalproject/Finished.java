@@ -21,8 +21,6 @@ public class Finished extends AppCompatActivity {
 
         getDatabase();
 
-
-
         Bundle extras = getIntent().getExtras();
 
         String myItemID = Integer.toString(extras.getInt("itemID"));
@@ -31,22 +29,19 @@ public class Finished extends AppCompatActivity {
         Log.v("currentItemID", myItemID);
 
 
-        db2=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
+        db2=openOrCreateDatabase("MyDatabase2", Context.MODE_PRIVATE, null);
 
 
         db2.execSQL("DROP TABLE IF EXISTS History");
-        db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+        db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, disposalType TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
         Log.v("currentItemIdCursor", c.getString(0));
 
-        db2.execSQL("INSERT INTO History " + "(" + myItemID + "," + c.getString(1) + "," + c.getString(2), null);
-        db2.execSQL("Select itemID, Item, Bins FROM GreenCompass ");
-        db2.execSQL("Select * FROM History");
-        Log.v("history", c.getString(2));
 
+        db2.execSQL("INSERT INTO History VALUES(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
     }
 
     public void goHome(View view) {
@@ -56,7 +51,7 @@ public class Finished extends AppCompatActivity {
 
     public void getDatabase(){
 
-        db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
+        db=openOrCreateDatabase("MyDatabase1", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
         db.execSQL("CREATE TABLE GreenCompass (itemID INT, Item TEXT, Bins TEXT)");
 
