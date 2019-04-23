@@ -16,6 +16,7 @@ public class Finished extends AppCompatActivity {
 
     SQLiteDatabase db2;
     SQLiteDatabase db;
+    int nextItemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,10 @@ public class Finished extends AppCompatActivity {
         getDatabase();
 
 
-
         Bundle extras = getIntent().getExtras();
+
+        nextItemID = extras.getInt("itemID");
+
 
         String myItemID = Integer.toString(extras.getInt("itemID"));
 
@@ -67,7 +70,9 @@ public class Finished extends AppCompatActivity {
 
     public void goToHistory(View view) {
         Intent x = new Intent(this, History.class);
+        x.putExtra("itemID", nextItemID);
         startActivity(x);
+
     }
 
     public void getDatabase(){

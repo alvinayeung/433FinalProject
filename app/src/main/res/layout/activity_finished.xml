@@ -76,14 +76,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="History"
+        android:text="RECYCLING HISTORY"
         android:onClick="goToHistory"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click here to go home."
-        android:id="@+id/homebutton"
-        android:onClick="goHome"/>
 
 </LinearLayout>
