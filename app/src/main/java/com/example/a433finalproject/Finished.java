@@ -10,20 +10,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class Finished extends AppCompatActivity {
 
-    SQLiteDatabase db2;
+    SQLiteDatabase historyDB;
     SQLiteDatabase db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finished);
 
         getDatabase();
-
 
 
         Bundle extras = getIntent().getExtras();
@@ -34,35 +32,35 @@ public class Finished extends AppCompatActivity {
         Log.v("currentItemID", myItemID);
 
 
-        db2=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
+        historyDB=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-        db2.execSQL("DROP TABLE IF EXISTS History");
-        db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+        historyDB.execSQL("DROP TABLE IF EXISTS History");
+        historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
         Log.v("currentItemIdCursor", c.getString(0));
 
-        db2.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
+        historyDB.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
         Log.v("history", c.getString(2));
 
         Cursor hC= db.rawQuery("Select * from History", null);
         int count = hC.getCount() * 10;
 
-        TextView xID= (TextView) findViewById(R.id.pointsID);
+        TextView xID= findViewById(R.id.pointsID);
         xID.setText(Integer.toString(count));
-
-        c.getCount();
-        Log.v("COUNT", " " + c.getCount());
-
-
     }
 
     public void goHome(View view) {
         Intent x = new Intent(this, Question.class);
         startActivity(x);
+    }
+
+    public void goToHistory(View view) {
+        Intent r = new Intent(this, History.class);
+        startActivity(r);
     }
 
     public void getDatabase(){
