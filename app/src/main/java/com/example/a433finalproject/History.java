@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 
-public class History extends AppCompatActivity {
+public class History extends AppCompatActivity implements View.OnClickListener {
 
 
     LinearLayout linearLayout;
@@ -34,10 +35,10 @@ public class History extends AppCompatActivity {
         historyDB=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-     //   historyDB.execSQL("DROP TABLE IF EXISTS History");
-     //   historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+       // historyDB.execSQL("DROP TABLE IF EXISTS History");
+       // historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
-        
+
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
@@ -51,6 +52,11 @@ public class History extends AppCompatActivity {
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+        Button homeButton = new Button(this);
+        homeButton.setText("Click here to go Home!");
+        linearLayout.addView(homeButton);
+
+        homeButton.setOnClickListener(this);
 
 
         if(c.getCount() > 0 ) {
@@ -68,11 +74,12 @@ public class History extends AppCompatActivity {
 
 
     }
+    public void onClick(View v) {
 
-    public void goHome(View view) {
         Intent x = new Intent(this, Question.class);
         startActivity(x);
     }
+
 
     public void getDatabase(){
 
@@ -124,4 +131,8 @@ public class History extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }
