@@ -46,13 +46,14 @@ public class History extends AppCompatActivity {
         Log.v("history", c.getString(2));
 
         Cursor hC= db.rawQuery("Select * from History", null);
+        hC.moveToFirst();
 
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-        if(c.getCount() > 0 ) {
+        if(c.getCount() > 0) {
 
             for( int i = 0; i < hC.getCount(); i++)
 
