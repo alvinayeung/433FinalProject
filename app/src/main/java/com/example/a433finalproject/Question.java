@@ -325,11 +325,7 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         return minIdx;
     }
 
-    public void goToHistory(View view) {
-        Intent x = new Intent(Question.this, History.class);
-        startActivity(x);
 
-    }
 
 
     public void getDatabase(){
