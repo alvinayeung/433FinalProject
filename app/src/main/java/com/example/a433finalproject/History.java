@@ -34,8 +34,8 @@ public class History extends AppCompatActivity {
         historyDB=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-     //   historyDB.execSQL("DROP TABLE IF EXISTS History");
-     //   historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+     historyDB.execSQL("DROP TABLE IF EXISTS History");
+     historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();

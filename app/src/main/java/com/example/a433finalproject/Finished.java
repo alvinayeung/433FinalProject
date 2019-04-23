@@ -40,8 +40,8 @@ public class Finished extends AppCompatActivity {
         db2=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-       // db2.execSQL("DROP TABLE IF EXISTS History");
-       // db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+       //db2.execSQL("DROP TABLE IF EXISTS History");
+       //db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
