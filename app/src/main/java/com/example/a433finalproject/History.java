@@ -52,6 +52,7 @@ public class History extends AppCompatActivity implements View.OnClickListener {
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+
         Button homeButton = new Button(this);
         homeButton.setText("Click here to go Home!");
         linearLayout.addView(homeButton);
@@ -59,17 +60,22 @@ public class History extends AppCompatActivity implements View.OnClickListener {
         homeButton.setOnClickListener(this);
 
 
-        if(c.getCount() > 0 ) {
+//
+//        if(c.getCount() > 0 ) {
+//
+//            for (int i = 0; i < hC.getCount(); i++) {
+//                TextView textView = new TextView(this);
+//                textView.setText(c.getString(1));
+//                linearLayout.addView(textView);
+//            }
+//
+//
+//        }
 
-            for( int i = 0; i < hC.getCount(); i++)
-
-            {
-                TextView textView = new TextView(this);
-                textView.setText(c.getString(1));
-                linearLayout.addView(textView);
-            }
-
-
+        if(c.getCount()>0){
+            TextView textView = new TextView(this);
+            textView.setText(c.getString(1));
+            linearLayout.addView(textView);
         }
 
 
