@@ -65,6 +65,11 @@ public class Finished extends AppCompatActivity {
         startActivity(x);
     }
 
+    public void goToHistory(View view) {
+        Intent x = new Intent(this, History.class);
+        startActivity(x);
+    }
+
     public void getDatabase(){
 
         db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
@@ -114,6 +119,7 @@ public class Finished extends AppCompatActivity {
 
 
     }
+
 
 
 }
