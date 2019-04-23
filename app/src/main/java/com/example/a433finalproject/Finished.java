@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Finished extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class Finished extends AppCompatActivity {
 
         getDatabase();
 
+
+
         Bundle extras = getIntent().getExtras();
 
         String myItemID = Integer.toString(extras.getInt("itemID"));
@@ -29,19 +34,30 @@ public class Finished extends AppCompatActivity {
         Log.v("currentItemID", myItemID);
 
 
-        db2=openOrCreateDatabase("MyDatabase2", Context.MODE_PRIVATE, null);
+        db2=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
         db2.execSQL("DROP TABLE IF EXISTS History");
-        db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, disposalType TEXT)");
+        db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
         Log.v("currentItemIdCursor", c.getString(0));
 
+        db2.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
+        Log.v("history", c.getString(2));
 
-        db2.execSQL("INSERT INTO History VALUES(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
+        Cursor hC= db.rawQuery("Select * from History", null);
+        int count = hC.getCount() * 10;
+
+        TextView xID= (TextView) findViewById(R.id.pointsID);
+        xID.setText(Integer.toString(count));
+
+        c.getCount();
+        Log.v("COUNT", " " + c.getCount());
+
+
     }
 
     public void goHome(View view) {
@@ -51,7 +67,7 @@ public class Finished extends AppCompatActivity {
 
     public void getDatabase(){
 
-        db=openOrCreateDatabase("MyDatabase1", Context.MODE_PRIVATE, null);
+        db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
         db.execSQL("CREATE TABLE GreenCompass (itemID INT, Item TEXT, Bins TEXT)");
 
