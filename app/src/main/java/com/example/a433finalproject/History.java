@@ -45,14 +45,17 @@ public class History extends AppCompatActivity {
         historyDB.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
         Log.v("history", c.getString(2));
 
+        Cursor hC= db.rawQuery("Select * from History", null);
+
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+
         if(c.getCount() > 0 ) {
 
-            for( int i = 0; i < c.getCount(); i++)
-            
+            for( int i = 0; i < hC.getCount(); i++)
+
             {
                 TextView textView = new TextView(this);
                 textView.setText(c.getString(1));
