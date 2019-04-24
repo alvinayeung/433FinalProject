@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 
@@ -18,6 +20,8 @@ public class History extends AppCompatActivity implements View.OnClickListener {
     LinearLayout linearLayout;
     SQLiteDatabase historyDB;
     SQLiteDatabase db;
+    Cursor hC;
+    int nextItemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,54 +33,63 @@ public class History extends AppCompatActivity implements View.OnClickListener {
 
         Bundle extras = getIntent().getExtras();
 
-        int myItemID = extras.getInt("itemID");
+        String myItemID = Integer.toString(extras.getInt("HistoryItemID"));
 
-
+        Log.v("NUMBER", " " + myItemID);
         historyDB=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-       // historyDB.execSQL("DROP TABLE IF EXISTS History");
-       // historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+    //    historyDB.execSQL("DROP TABLE IF EXISTS History");
+    //    historyDB.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
-        Log.v("currentItemIdCursor", c.getString(0));
+        hC= db.rawQuery("Select * from History", null);
+        hC.moveToFirst();
 
-        historyDB.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
-        Log.v("history", c.getString(2));
+        Log.v("COUNTING2", " "+ hC.getCount());
 
-        Cursor hC= db.rawQuery("Select * from History", null);
+        //TEST if printing all the data rows in db
+//        for (int i=0; i< hC.getCount(); i++) {
+//            Log.v("HISTORY DATABSE2", " " + hC.getInt(0) + ", " + hC.getString(1) + ", " + hC.getString(2));
+//
+//            hC.moveToNext();
+//        }
 
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+
         Button homeButton = new Button(this);
         homeButton.setText("Click here to go Home!");
         linearLayout.addView(homeButton);
 
         homeButton.setOnClickListener(this);
 
+//        ScrollView scroll = new ScrollView(this);
+//        scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+//        scroll.scrollTo(0, scroll.getBottom());
+//        linearLayout.addView(scroll);
 
-        if(c.getCount() > 0 ) {
+  //      hC.moveToFirst();
 
-            for( int i = 0; i < hC.getCount(); i++)
 
-            {
+            for ( int i = 0; i < hC.getCount(); i++) {
                 TextView textView = new TextView(this);
-                textView.setText(c.getString(1));
+                textView.setText(hC.getString(1) + " - " + hC.getString(2));
+                Log.v("COUNTING", " " + hC.getCount());
+                Log.v("HISTORY DATABSE2", " " + hC.getInt(0) + ", " + hC.getString(1) + ", " + hC.getString(2));
+
                 linearLayout.addView(textView);
+                hC.moveToNext();
             }
-
-
-        }
-
-
     }
     public void onClick(View v) {
 
         Intent x = new Intent(this, Question.class);
+        x.putExtra("HistoryItemID", nextItemID);
         startActivity(x);
     }
 
