@@ -30,7 +30,6 @@ public class FoundLoc extends AppCompatActivity {
         setContentView(R.layout.activity_found_loc);
 
         Bundle extras = getIntent().getExtras();
-
         if(extras.getByteArray("picture") != null) {
             byte[] byteArray = extras.getByteArray("picture");
 
@@ -51,7 +50,7 @@ public class FoundLoc extends AppCompatActivity {
             String part2String = extras.getString("bin");
 
             routeID = extras.getInt("routeID");
-            currentItemID = extras.getInt("itemID");
+            currentItemID = extras.getInt("HistoryItemID");
 
             Log.v("routeID", Integer.toString(routeID));
             Log.v("FoundLocCurrentItemID", Integer.toString(currentItemID));
@@ -83,7 +82,7 @@ public class FoundLoc extends AppCompatActivity {
             part1.setText(searchString);
 
             routeID = extras.getInt("routeID");
-            currentItemID = extras.getInt("itemID");
+            currentItemID = extras.getInt("HistoryItemID");
             Log.v("FoundLoccurrentItemID", Integer.toString(currentItemID));
 
 
@@ -114,8 +113,9 @@ public class FoundLoc extends AppCompatActivity {
     public void updateNo(View view) {
 
         Intent a = new Intent(FoundLoc.this, Finished.class);
-        a.putExtra("itemID",currentItemID);
+        a.putExtra("HistoryItemID",currentItemID);
         startActivity(a);
+
     }
 
 

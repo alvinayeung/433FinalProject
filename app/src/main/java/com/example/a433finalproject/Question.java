@@ -58,13 +58,25 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
     public int routeID;
     int minDistanceInt;
     int currentItemID;
-
-
+    int nextItemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+             nextItemID = bundle.getInt("itemID");
+            Log.v("NUM", " " + nextItemID);
+
+        }
+        for (int i=0; i>0 ; i++) {
+            String historyString =bundle.getString("historydb" + i);
+            Log.v("HISTORYSTRING", historyString);
+        }
+
 
         if (gac == null){
             gac = new GoogleApiClient.Builder(this).
@@ -221,7 +233,9 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
             x.putExtra("minDistance", minDistanceInt);
             x.putExtra("routeID",routeID);
             x.putExtra("picture", byteArray);
-            x.putExtra("itemID", currentItemID);
+          //  x.putExtra("itemID", currentItemID);
+            x.putExtra("HistoryItemID", currentItemID);
+
             Log.v("currentItemID", Integer.toString(currentItemID));
 
             startActivity(x);
@@ -325,12 +339,15 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         return minIdx;
     }
 
-
+//    public void goToHistory(View view) {
+//
+//        Intent x = new Intent(this, History.class);
+//        x.putExtra("HistoryItemID", nextItemID);
+//        startActivity(x);
+//    }
 
 
     public void getDatabase(){
-
-
         //item database
         db=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS GreenCompass");
@@ -673,7 +690,6 @@ public class Question extends AppCompatActivity implements GoogleApiClient.Conne
         binsDatabase.execSQL("INSERT INTO Bins VALUES (433, 35.902988, -79.054077, 'trash_trash', 'bin433.jpg')");
 
     }
-
 
 
 }

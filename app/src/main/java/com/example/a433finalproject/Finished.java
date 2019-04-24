@@ -17,6 +17,7 @@ public class Finished extends AppCompatActivity {
     SQLiteDatabase db2;
     SQLiteDatabase db;
     int nextItemID;
+    Cursor hC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,52 +26,68 @@ public class Finished extends AppCompatActivity {
 
         getDatabase();
 
-
         Bundle extras = getIntent().getExtras();
 
-        nextItemID = extras.getInt("itemID");
+        nextItemID = extras.getInt("HistoryItemID");
 
 
-        String myItemID = Integer.toString(extras.getInt("itemID"));
+        String myItemID = Integer.toString(extras.getInt("HistoryItemID"));
 
 
         Log.v("currentItemID", myItemID);
 
-
         db2=openOrCreateDatabase("MyDatabase", Context.MODE_PRIVATE, null);
 
 
-       // db2.execSQL("DROP TABLE IF EXISTS History");
-       // db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
+    //    db2.execSQL("DROP TABLE IF EXISTS History");
+    //    db2.execSQL("CREATE TABLE History (itemID INT, Item TEXT, Bins TEXT)");
 
         Cursor c = db.rawQuery("SELECT * FROM GreenCompass WHERE itemID = " + myItemID, null);
         c.moveToFirst();
 
+        hC= db2.rawQuery("Select * from History", null);
+        hC.moveToFirst();
+
+        Log.v("COUNTING1", " " + hC.getCount());
+
+
         Log.v("currentItemIdCursor", c.getString(0));
 
         db2.execSQL("INSERT INTO History values(" + myItemID + "," + "'" + c.getString(1) + "'" + "," + "'" + c.getString(2)+ "'" + ");");
-        Log.v("history", c.getString(2));
 
-        Cursor hC= db.rawQuery("Select * from History", null);
+
+         hC= db2.rawQuery("Select * from History", null);
+        hC.moveToFirst();
+
+        Log.v("COUNTING2", " "+ hC.getCount());
+
+        for (int i=0; i< hC.getCount(); i++) {
+            Log.v("HISTORY DATABSE", " " + hC.getInt(0) + ", " + hC.getString(1) + ", " + hC.getString(2));
+
+            hC.moveToNext();
+        }
+
         int count = hC.getCount() * 10;
+
 
         TextView xID= (TextView) findViewById(R.id.pointsID);
         xID.setText(Integer.toString(count));
 
-        c.getCount();
-        Log.v("COUNT", " " + c.getCount());
+//        c.getCount();
+//        Log.v("COUNT", " " + c.getCount());
 
 
     }
-
-    public void goHome(View view) {
-        Intent x = new Intent(this, Question.class);
-        startActivity(x);
-    }
+//
+//    public void goHome(View view) {
+//        Intent x = new Intent(this, Question.class);
+//        x.putExtra("HistoryItemID", nextItemID);
+//        startActivity(x);
+//    }
 
     public void goToHistory(View view) {
         Intent x = new Intent(this, History.class);
-        x.putExtra("itemID", nextItemID);
+        x.putExtra("HistoryItemID", nextItemID);
         startActivity(x);
 
     }
